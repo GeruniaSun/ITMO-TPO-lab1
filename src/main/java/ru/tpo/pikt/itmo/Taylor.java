@@ -3,6 +3,8 @@ package ru.tpo.pikt.itmo;
 public class Taylor {
 
     public static double cos(double x, int n) {
+        x = Math.abs(x) % (2 * Math.PI);
+
         double res = 1.0;
         double last = 1.0;
 
