@@ -29,7 +29,12 @@ public class RadixSortTest {
     @Test
     @DisplayName("Check negative values")
     void checkNegativeValues() {
-        assertArrayEquals(new int[]{-5, -4, -3, -2, -1}, RadixSort.sort(new int[]{-5, -1, -4, -3, -2}));
+        assertAll(
+            () -> assertArrayEquals(new int[]{-999, -785, -123, -105, -99, -98, -95, -92, -32, -31, -30, -9, -7, -5, -2, -1},
+            RadixSort.sort(new int[]{-785, -999, -92, -105, -99, -5, -32, -95, -7, -30, -1, -98, -9, -123, -2, -31})),
+            () -> assertArrayEquals(new int[]{-999, -785, -123, -105, -99, -98, -95, 1, 3, 48, 59, 266, 842, 9944, 63257},
+            RadixSort.sort(new int[]{-785, 59, -999, 842, 63257, -105, 266, -99, 48, 3, -95, -98, -123, 1, 9944}))
+        );
     }
 
     @Test

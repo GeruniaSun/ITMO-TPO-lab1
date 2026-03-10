@@ -4,6 +4,7 @@ public class RadixSort {
 
     public static int[] sort(int[] arr) {
         if (arr == null || arr.length < 2) return arr;
+        // проверки на NaN не буде потому что не может быть инт нана
 
         // отрицательные отдельно
         int posCount = 0, negCount = 0;
