@@ -1,16 +1,17 @@
 package ru.tpo.pikt.itmo.entities.actors;
 
-public class Character {
+import ru.tpo.pikt.itmo.entities.actions.Action;
+import ru.tpo.pikt.itmo.entities.actions.ActionType;
+import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
 
-    private int id;
+public class Character extends Actor{
+
     private String name;
     private Role role;
 
     public Character(int id, String name, Role role) {
 
-        if (id <= 0) {
-            throw new IllegalArgumentException("Id must be bigger then zero");
-        }
+        super(id);
 
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
@@ -19,17 +20,27 @@ public class Character {
         if (role == null) {
             throw new IllegalArgumentException("Role cannot be bull");
         }
-
-        this.id = id;
         this.name = name;
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String describe() {
+        return name + " (" + role + ")";
     }
 
-    public Role getRole() {
-        return role;
+    public Action speak(int actionId, Actor target) {
+        return new Action(actionId, ActionType.SPEAK, this, target);
     }
+
+    public Action move(int actionId, MovementDetails details) {
+        Action moveAction =  new Action(actionId, ActionType.MOVE, this, null);
+        moveAction.setMovementDetails(details);
+        return moveAction;
+    }
+
+    public Action perceive(int actionId) {
+        return new Action(actionId, ActionType.PERCEIVE, this, null);
+    }
+
 }
