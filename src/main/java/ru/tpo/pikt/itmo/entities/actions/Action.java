@@ -1,79 +1,62 @@
 package ru.tpo.pikt.itmo.entities.actions;
 
-import ru.tpo.pikt.itmo.entities.actors.Character;
-import ru.tpo.pikt.itmo.entities.actors.Crowd;
-import ru.tpo.pikt.itmo.entities.buildings.Window;
+import ru.tpo.pikt.itmo.entities.actors.Actor;
 
 public class Action {
 
     private int id;
     private ActionType type;
-    private Character character;
-    private Crowd crowd;
-    private Character targetCharacter;
-    private Crowd targetCrowd;
+    private Actor initiator;
+    private Actor target;
+    private MovementDetails movementDetails;
 
-    private Action() {}
+    public Action(int id, ActionType type, Actor initiator, Actor target) {
 
-    public static class Builder {
-        private int id;
-        private ActionType type;
-        private Character character;
-        private Crowd crowd;
-        private Character targetCharacter;
-        private Crowd targetCrowd;
-
-        public Builder(int id, ActionType type) {
-
-            if (id <= 0) {
-                throw new IllegalArgumentException("Id must be bigger then zero");
-            }
-
-            if (type == null) {
-                throw new IllegalArgumentException("Action type cannot be null");
-            }
-
-            this.id = id;
-            this.type = type;
+        if (id <= 0) {
+            throw new IllegalArgumentException("Id must be bigger than zero");
         }
 
-        public Builder character(Character character) {
-            this.character = character;
-            return this;
+        if (type == null) {
+            throw new IllegalArgumentException("Action type cannot be null");
         }
 
-        public Builder crowd(Crowd crowd) {
-            this.crowd = crowd;
-            return this;
+        if (initiator == null) {
+            throw new IllegalArgumentException("Action must have initiator");
         }
 
-        public Builder targetCharacter(Character targetCharacter) {
-            this.targetCharacter = targetCharacter;
-            return this;
+        this.id = id;
+        this.type = type;
+        this.initiator = initiator;
+        this.target = target;
+    }
+
+    public void setMovementDetails(MovementDetails details) {
+        if (type != ActionType.MOVE) {
+            throw new IllegalStateException("Movement details can only be set for MOVE action");
         }
+        this.movementDetails = details;
+    }
 
-        public Builder targetCrowd(Crowd targetCrowd) {
-            this.targetCrowd = targetCrowd;
-            return this;
+    public boolean hasTarget() {
+        return target != null;
+    }
+
+    public boolean isMovement() {
+        return type == ActionType.MOVE;
+    }
+
+    public MovementDetails getMovementDetails() {
+        return movementDetails;
+    }
+
+    public String describe() {
+        String describe = initiator.describe() + " do " + type;
+        if (hasTarget()) {
+            describe += " to " + target.describe();
         }
-
-
-        public Action build() {
-
-            if (character == null && crowd == null) {
-                throw new IllegalArgumentException("Action must have initiator");
-            }
-
-            Action action = new Action();
-            action.id = id;
-            action.type = type;
-            action.character = character;
-            action.crowd = crowd;
-            action.targetCharacter = targetCharacter;
-            action.targetCrowd = targetCrowd;
-
-            return action;
+        if (isMovement() && movementDetails != null) {
+            describe += "\n details: " + movementDetails.describeMovement();
         }
-
+        return describe;
     }
 }

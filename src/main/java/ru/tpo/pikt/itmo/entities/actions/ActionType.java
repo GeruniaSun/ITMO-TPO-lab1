@@ -5,5 +5,4 @@ public enum ActionType {
     MOVE,
     PERCEIVE,
     SPEAK,
-    STAND
 }

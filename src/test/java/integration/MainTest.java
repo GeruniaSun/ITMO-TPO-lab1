@@ -1,5 +1,6 @@
-package ru.tpo.pikt.itmo;
+package integration;
 
+import org.junit.jupiter.api.Test;
 import ru.tpo.pikt.itmo.entities.actions.Action;
 import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
 import ru.tpo.pikt.itmo.entities.actions.MovementType;
@@ -10,49 +11,53 @@ import ru.tpo.pikt.itmo.entities.buildings.Building;
 import ru.tpo.pikt.itmo.entities.buildings.Platform;
 import ru.tpo.pikt.itmo.entities.buildings.Window;
 
-public class Main {
-    public static void main(String[] args) {
+import static org.junit.jupiter.api.Assertions.*;
+
+class MainTest {
+
+    @Test
+    void fullScenarioTest() {
 
         Character arthur = new Character(1, "Артур", Role.MAIN);
         Character orator = new Character(2, "Оратор", Role.MINOR);
         Crowd crowd = new Crowd(1, "ликующая", 500);
 
         Action shout = crowd.shout(1);
-        System.out.println(shout.describe());
+        assertTrue(shout.describe().contains("SHOUT"));
 
         Action perceive = arthur.perceive(2);
-        System.out.println(perceive.describe());
+        assertTrue(perceive.describe().contains("PERCEIVE"));
 
         MovementDetails movementDetails = new MovementDetails(
-             1,
-             MovementType.SLIDES,
-             "воздух",
-             "-",
-             "окно во втором этаже здания"
+                1,
+                MovementType.SLIDES,
+                "воздух",
+                "-",
+                "окно во втором этаже здания"
         );
-        Action move = arthur.move(3, movementDetails);
 
-        System.out.println(move.describe());
+        Action move = arthur.move(3, movementDetails);
+        assertTrue(move.describe().contains("SLIDES"));
 
         Building building = new Building(1, 2);
+
         Window window = new Window(1, building, 2, true);
-        building.addComponent(window);
         building.addComponent(window);
 
         Platform platform = new Platform(1, building, true);
         building.addComponent(platform);
 
         Action speak = orator.speak(4, crowd);
-        System.out.println(speak.describe());
+        assertTrue(speak.describe().contains("SPEAK"));
 
-        System.out.println("\n" + "Информация о действующих персонажах и объектах в истории:" + "\n" +
-                arthur.describe() + "\n" +
-                orator.describe() + "\n" +
-                crowd.describe() + "\n" +
-                building.describe()
+        String buildingDescription = building.describe();
 
-        );
+        assertTrue(buildingDescription.contains("Building"));
+        assertTrue(buildingDescription.contains("Window"));
+        assertTrue(buildingDescription.contains("Platform"));
 
-
+        assertTrue(arthur.describe().contains("Артур"));
+        assertTrue(orator.describe().contains("Оратор"));
+        assertTrue(crowd.describe().contains("ликующая"));
     }
 }
