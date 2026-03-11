@@ -20,7 +20,7 @@ public class StoryScenarioTest {
         Character arthur = new Character(1, "Артур", Role.MAIN);
         Character speaker = new Character(2, "Оратор", Role.MINOR);
 
-        Crowd crowd = new Crowd(1, "ликующая", 500);
+        Crowd crowd = new Crowd(1, "спокойная", 500);
 
         Action shout = new Action.Builder(1, ActionType.SHOUT)
                 .crowd(crowd)

@@ -12,8 +12,8 @@ public class Crowd {
             throw new IllegalArgumentException("Id must be bigger then zero");
         }
 
-        if (size <= 0) {
-            throw new IllegalArgumentException("Crowd size cannot be negative");
+        if (size <= 1) {
+            throw new IllegalArgumentException("Crowd size must be bigger than 1");
         }
 
         this.id = id;

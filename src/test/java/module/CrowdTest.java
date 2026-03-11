@@ -44,4 +44,12 @@ public class CrowdTest {
         });
     }
 
+    @Test
+    void crowdSizeMustBeBiggerThanOne() {
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Crowd(1, "ликующая", 1);
+        });
+    }
+
 }
