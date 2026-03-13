@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.tpo.pikt.itmo.entities.actions.Action;
 import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
 import ru.tpo.pikt.itmo.entities.actions.MovementType;
+import ru.tpo.pikt.itmo.entities.actions.Position;
 import ru.tpo.pikt.itmo.entities.actors.Character;
 import ru.tpo.pikt.itmo.entities.actors.Role;
 
@@ -56,7 +57,8 @@ public class CharacterTest {
     @Test
     void createsMoveActionWithMovementDetails() {
         Character character = new Character(1, "Артур", Role.MAIN);
-        MovementDetails details = new MovementDetails(1, MovementType.SLIDES, "воздух", "крыша", "окно");
+        MovementDetails details = new MovementDetails(1, MovementType.SLIDES, "воздух",
+                new Position("крыша", 10.0, 10.0, 10.0), new Position("окно", 50.0, 60.0, 80.0), 12.0);
 
         Action action = character.move(1, details);
 

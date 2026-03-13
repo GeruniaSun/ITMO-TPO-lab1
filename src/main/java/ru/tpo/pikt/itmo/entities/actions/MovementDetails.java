@@ -4,10 +4,11 @@ public class MovementDetails {
     private int id;
     private MovementType movementType;
     private String environment;
-    private String startPosition;
-    private String endPosition;
+    private Position startPosition;
+    private Position endPosition;
+    private double speed;
 
-    public MovementDetails(int id, MovementType movementType, String environment, String startPosition, String endPosition) {
+    public MovementDetails(int id, MovementType movementType, String environment, Position startPosition, Position endPosition, double speed) {
 
         if (id <= 0) {
             throw new IllegalArgumentException("Id must be bigger then zero");
@@ -22,9 +23,11 @@ public class MovementDetails {
         this.environment = environment;
         this.startPosition = startPosition;
         this.endPosition = endPosition;
+        this.speed = speed;
     }
 
     public String describeMovement() {
-        return movementType + " from " + startPosition + " to " + endPosition + " in the " + environment;
+        return movementType + " from " + startPosition.name() + " to " + endPosition.name() + " in the " + environment +
+                " it will take " + Position.getEuclidDistance(startPosition, endPosition) / speed;
     }
 }

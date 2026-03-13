@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.tpo.pikt.itmo.entities.actions.Action;
 import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
 import ru.tpo.pikt.itmo.entities.actions.MovementType;
+import ru.tpo.pikt.itmo.entities.actions.Position;
 import ru.tpo.pikt.itmo.entities.actors.Character;
 import ru.tpo.pikt.itmo.entities.actors.Crowd;
 import ru.tpo.pikt.itmo.entities.actors.Role;
@@ -32,8 +33,9 @@ class MainTest {
                 1,
                 MovementType.SLIDES,
                 "воздух",
-                "-",
-                "окно во втором этаже здания"
+                new Position("-", 0.0, 0.0, 0.0),
+                new Position("окно во втором этаже здания", 24.22, 56.37, 39.39),
+                25.0
         );
 
         Action move = arthur.move(3, movementDetails);

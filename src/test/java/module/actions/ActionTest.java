@@ -1,10 +1,7 @@
 package module.actions;
 
 import org.junit.jupiter.api.Test;
-import ru.tpo.pikt.itmo.entities.actions.Action;
-import ru.tpo.pikt.itmo.entities.actions.ActionType;
-import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
-import ru.tpo.pikt.itmo.entities.actions.MovementType;
+import ru.tpo.pikt.itmo.entities.actions.*;
 import ru.tpo.pikt.itmo.entities.actors.*;
 import ru.tpo.pikt.itmo.entities.actors.Character;
 import ru.tpo.pikt.itmo.entities.actors.Role;
@@ -43,7 +40,8 @@ class ActionTest {
     @Test
     void setMovementsDetailsWithCorrectType() {
         Action moveAction = new Action(1, ActionType.MOVE, orator, crowd);
-        MovementDetails details = new MovementDetails(1, MovementType.GOES, "двор", "помост", "площадь");
+        MovementDetails details = new MovementDetails(1, MovementType.GOES, "двор",
+                new Position("помост", 20.0, 20.0, 20.0), new Position("площадь", 70.0, 30.0, 40.0), 50.0);
         moveAction.setMovementDetails(details);
         assertEquals(details, moveAction.getMovementDetails());
     }
@@ -51,7 +49,8 @@ class ActionTest {
     @Test
     void setMovementsDetailsWithIncorrectType() {
         Action notMoveAction = new Action(1, ActionType.SPEAK, orator, crowd);
-        MovementDetails details = new MovementDetails(1, MovementType.GOES, "двор", "помост", "площадь");
+        MovementDetails details = new MovementDetails(1, MovementType.GOES, "двор",
+                new Position("помост", 20.0, 20.0, 20.0), new Position("площадь", 70.0, 30.0, 40.0), 50.0);
         assertThrows(IllegalStateException.class,
                 () -> notMoveAction.setMovementDetails(details));
     }
@@ -97,7 +96,8 @@ class ActionTest {
     void describeMoveWithDetails() {
         Character arthur = new Character(1, "Артур", Role.MAIN);
 
-        MovementDetails details = new MovementDetails(10, MovementType.SLIDES, "воздух", "крыша", "окно");
+        MovementDetails details = new MovementDetails(10, MovementType.SLIDES, "воздух",
+                new Position("крыша", 10.0, 10.0, 10.0), new Position("окно", 50.0, 60.0, 80.0), 12.0);
 
         Action action = new Action(1, ActionType.MOVE, arthur, null);
         action.setMovementDetails(details);
@@ -108,5 +108,4 @@ class ActionTest {
         assertTrue(result.contains("details"));
         assertTrue(result.contains("окно"));
     }
-
 }
