@@ -6,8 +6,8 @@ import ru.tpo.pikt.itmo.entities.actions.MovementDetails;
 
 public class Character extends Actor{
 
-    private String name;
-    private Role role;
+    private final String name;
+    private final Role role;
 
     public Character(int id, String name, Role role) {
 

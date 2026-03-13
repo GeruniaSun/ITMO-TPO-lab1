@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
-    private int id;
-    private int floors;
-    private List<BuildingComponent> components = new ArrayList<>();
+    private final int id;
+    private final int floors;
+    private final List<BuildingComponent> components = new ArrayList<>();
 
     public Building(int id, int floors) {
 

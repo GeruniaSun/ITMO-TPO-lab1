@@ -5,8 +5,8 @@ import ru.tpo.pikt.itmo.entities.actions.ActionType;
 
 public class Crowd extends Actor{
 
-    private String state;
-    private int size;
+    private final String state;
+    private final int size;
 
     public Crowd(int id, String state, int size) {
 

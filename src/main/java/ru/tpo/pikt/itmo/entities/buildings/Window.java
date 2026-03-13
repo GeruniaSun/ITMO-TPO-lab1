@@ -2,8 +2,8 @@ package ru.tpo.pikt.itmo.entities.buildings;
 
 public class Window extends BuildingComponent{
 
-    private int floor;
-    private boolean isGrand;
+    private final int floor;
+    private final boolean isGrand;
 
     public Window(int id, Building building, int floor, boolean isGrand) {
 

@@ -1,12 +1,12 @@
 package ru.tpo.pikt.itmo.entities.actions;
 
 public class MovementDetails {
-    private int id;
-    private MovementType movementType;
-    private String environment;
-    private Position startPosition;
-    private Position endPosition;
-    private double speed;
+    private final int id;
+    private final MovementType movementType;
+    private final String environment;
+    private final Position startPosition;
+    private final Position endPosition;
+    private final double speed;
 
     public MovementDetails(int id, MovementType movementType, String environment, Position startPosition, Position endPosition, double speed) {
 
@@ -29,5 +29,9 @@ public class MovementDetails {
     public String describeMovement() {
         return movementType + " from " + startPosition.name() + " to " + endPosition.name() + " in the " + environment +
                 " it will take " + Position.getEuclidDistance(startPosition, endPosition) / speed;
+    }
+
+    public int getId() {
+        return id;
     }
 }

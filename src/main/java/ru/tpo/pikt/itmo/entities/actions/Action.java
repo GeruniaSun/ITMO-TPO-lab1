@@ -4,10 +4,9 @@ import ru.tpo.pikt.itmo.entities.actors.Actor;
 
 public class Action {
 
-    private int id;
-    private ActionType type;
-    private Actor initiator;
-    private Actor target;
+    private final ActionType type;
+    private final Actor initiator;
+    private final Actor target;
     private MovementDetails movementDetails;
 
     public Action(int id, ActionType type, Actor initiator, Actor target) {
@@ -24,7 +23,6 @@ public class Action {
             throw new IllegalArgumentException("Action must have initiator");
         }
 
-        this.id = id;
         this.type = type;
         this.initiator = initiator;
         this.target = target;
